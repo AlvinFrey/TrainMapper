@@ -1,0 +1,47 @@
+{
+  "name": "tchoutchou",
+  "version": "1.0.0",
+  "description": "Telemetry sytem for modelism rail system",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/EmuTeam/tchoutchou.git"
+  },
+  "license": "CC-BY-NC-SA-4.0",
+  "scripts": {
+    "start": "node bin/core.js"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/EmuTeam/tchoutchou/issues"
+  },
+  "author": {
+    "name": "FREY Alvin",
+    "email": "alvin.frey@protonmail.ch",
+    "url": "https://twitter.com/Frey_Alvin"
+  },
+  "contributors": [
+    {
+      "name": "FRITZ Valentin",
+      "email": "fritz.valentin@live.fr"
+    },
+    {
+      "name": "TAHON Valentin",
+      "email": "valentin.tahon2@gmail.com"
+    },
+    {
+      "name": "PARRENT Dorian",
+      "email": "dorian.parrent@gmail.com"
+    },
+    {
+      "name": "DEVERRE Loïc",
+      "email": "loic.deverre@gmail.com"
+    }
+  ],
+  "dependencies": {
+    "colors": "^1.1.2",
+    "express": "^4.14.0",
+    "health-check-library": "^2.0.1",
+    "serialport": "^4.0.7",
+    "socket.io": "^1.7.2"
+  }
+}
