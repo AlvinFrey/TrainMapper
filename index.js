@@ -1,11 +1,11 @@
 
+var Serial = require("serialport");
 var colors = require('colors');
-var serial = require("serialport");
 var telemetry = require("./lib/telemetry");
 var parser = require("./lib/parser");
 var healthCheck = require("./lib/health");
 
-var serialPort = new serial("/dev/ttyUSB0", {baudRate: 57600});
+var serialPort = new Serial("/dev/ttyUSB0", {baudRate: 57600});
 
 serialPort.on('open', function(){
 
