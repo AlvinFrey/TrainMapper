@@ -1,0 +1,20 @@
+
+.layout-transparent {
+
+    background: url('../img/background.jpg') center / cover;
+
+}
+
+.layout-transparent .mdl-layout__header, .layout-transparent .mdl-layout__drawer-button {
+
+    color: white;
+
+}
+
+.mdl-layout__title, .mdl-layout-title {
+
+    margin: auto;
+    font-size: 30px !important;
+    text-shadow: 3px 1px 5px rgba(150, 150, 150, 1);
+
+}

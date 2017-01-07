@@ -1,9 +1,9 @@
 
-var Serial = require("serialport");
 var colors = require('colors');
+var Serial = require("serialport");
 var telemetry = require("./lib/telemetry");
-var parser = require("./lib/parser");
 var healthCheck = require("./lib/health");
+var parser = require("./lib/parser");
 
 var serialPort = new Serial("/dev/ttyUSB0", {baudRate: 57600});
 
@@ -22,9 +22,6 @@ serialPort.on('data', function(serialData){
 serialPort.on('error', function(serialError){
 
     console.log("[SERIAL CONNECTION] Erreur de la connexion série : ".red, serialError.toString().bold.red);
+    //process.exit(1); A METTRE EN PROD
 
 });
-
-//UNIQUEMENT POUR LE TEST
-
-console.log(parser.parseMessage("63F01 42"));
