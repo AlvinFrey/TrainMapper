@@ -17,6 +17,8 @@ serialPort.on('data', function(serialData){
 
     console.log("[SERIAL CONNECTION] Nouvelle donnée reçue : ".green, serialData.bold.green);
 
+    console.log(parser.parseMessage(serialData));
+
 });
 
 serialPort.on('error', function(serialError){
