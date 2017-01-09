@@ -5,12 +5,31 @@ var telemetry = require("./lib/telemetry");
 var healthCheck = require("./lib/health");
 var parser = require("./lib/parser");
 
-var windowsPort = "COM5";
-var linuxPort= "/dev/ttyUSB0";
+Serial.list(function (err, testingPorts) {
 
-var serialPort = new Serial(windowsPort, {baudRate: 57600});
+    testingPorts.forEach(function(port) {
 
-serialPort.on('open', function(){
+        var serialPort = new Serial(port.comName);
+
+        serialPort.on('data', function(serialData){
+
+            if (serialData.toString().search("/MODULE FEUX DE SIGNALISATION/g")) {
+
+                console.log("c'est lui");
+
+            }else{
+
+                serialPort.close();
+
+            }
+
+        });
+
+    });
+
+});
+
+/*serialPort.on('open', function(){
 
     console.log("[SERIAL CONNECTION] Connexion série établie : ".green);
 
@@ -43,4 +62,4 @@ serialPort.on('disconnect', function(){
 
    console.log("[SERIAL CONNECTION] La connexion série vient d'être déconnecté ! ".red);
 
-});
+});*/
