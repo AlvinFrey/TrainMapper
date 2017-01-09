@@ -21,7 +21,21 @@ serialPort.on('data', function(serialData){
 
 serialPort.on('error', function(serialError){
 
-    console.log("[SERIAL CONNECTION] Erreur de la connexion série : ".red, serialError.toString().bold.red);
-    //process.exit(1); A METTRE EN PROD
+    if(serialError.toString() == "Error: Error: No such file or directory, cannot open /dev/ttyUSB0"){
+
+        console.log("[SERIAL CONNECTION] le port série n'a pas été trouvé ? Est-ce que vous l'avez branché ?".bold.red);
+
+    }else{
+
+        console.log("[SERIAL CONNECTION] Erreur de la connexion série : ".red, serialError.toString().bold.red);
+        process.exit(1);
+
+    }
+
+});
+
+serialPort.on('disconnect', function(){
+
+   console.log("[SERIAL CONNECTION] La connexion série vient d'être déconnecté ! ".red);
 
 });
