@@ -5,15 +5,10 @@ var telemetry = require("./lib/telemetry");
 var healthCheck = require("./lib/health");
 var parser = require("./lib/parser");
 
-Serial.list(function (err, ports) {
-  ports.forEach(function(port) {
-    console.log(port.comName);
-    console.log(port.pnpId);
-    console.log(port.manufacturer);
-  });
-});
+var windowsPort = "COM5";
+var linuxPort= "/dev/ttyUSB0";
 
-var serialPort = new Serial("/dev/ttyUSB0", {baudRate: 57600});
+var serialPort = new Serial(windowsPort, {baudRate: 57600});
 
 serialPort.on('open', function(){
 
@@ -23,7 +18,7 @@ serialPort.on('open', function(){
 
 serialPort.on('data', function(serialData){
 
-    console.log("[SERIAL CONNECTION] Nouvelle donnée reçue : ".green, serialData.bold.green);
+    console.log("[SERIAL CONNECTION] Nouvelle donnée reçue : ".green, serialData.toString().bold.green);
 
     console.log(parser.parseMessage(serialData));
 
