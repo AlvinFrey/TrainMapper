@@ -5,42 +5,42 @@ var telemetry = require("./lib/telemetry");
 var healthCheck = require("./lib/health");
 var parser = require("./lib/parser");
 
-var windowsPort = "COM5";
-var linuxPort= "/dev/ttyUSB0";
+Serial.list(function (err, testingPorts) {
 
-var serialPort = new Serial(windowsPort, {baudRate: 57600});
+    testingPorts.forEach(function(port) {
+	
+        var serialPort = new Serial(port.comName, {
+            baudRate: 57600,
+            parser: Serial.parsers.readline('\n')
+        });
 
-serialPort.on('open', function(){
+        var verificationTimeout = setTimeout(function(){
 
-    console.log("[SERIAL CONNECTION] Connexion série établie : ".green);
+            serialPort.on('data', function(serialData){
 
-});
+                if (serialData.toString().search("/MODULE FEUX DE SIGNALISATION/g")) {
 
-serialPort.on('data', function(serialData){
+                    clearTimeout(verificationTimeout);
 
-    console.log("[SERIAL CONNECTION] Nouvelle donnée reçue : ".green, serialData.toString().bold.green);
+                    console.log("[SERIAL CONNECTION] Nouvelle donnée reçue : ".green, serialData.toString().bold.green);
 
-    process.emit('serial-data', parser.parseMessage(serialData.toString()));
+                    process.emit('serial-data', parser.parseMessage(serialData.toString()));
 
-});
+                    serialPort.on('disconnect', function(){
 
-serialPort.on('error', function(serialError){
+                        console.log("[SERIAL CONNECTION] La connexion série vient d'être déconnecté ! ".red);
 
-    if(serialError.toString().search("/Error: No such file or directory/g")){
+                    });
 
-        console.log("[SERIAL CONNECTION] Le port série n'a pas été trouvé ? Est-ce que vous l'avez branché ?".bold.red);
+                }else{
 
-    }else{
+                    serialPort.close();
 
-        console.log("[SERIAL CONNECTION] Erreur de la connexion série : ".red, serialError.toString().bold.red);
-        process.exit(1);
+                }
+            });
 
-    }
+        }, 2500);
 
-});
-
-serialPort.on('disconnect', function(){
-
-   console.log("[SERIAL CONNECTION] La connexion série vient d'être déconnecté ! ".red);
+    });
 
 });
