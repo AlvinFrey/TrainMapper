@@ -6,48 +6,30 @@ var parser = require("./lib/parser");
 
 Serial.list(function (err, testingPorts) {
 
-    if(testingPorts==[]) {
+    testingPorts.forEach(function(port) {
 
-        console.log("[SERIAL CONNECTION] Impossible de trouver un port COM utilisable".red);
+        if(port.vendorId=="0x0403"){
 
-    }else{
+            var serialPort = new Serial(port.comName, {
+                baudRate: 57600,
+                parser: Serial.parsers.readline('\n')
+            });
 
-        testingPorts.forEach(function(port) {
+            serialPort.on('data', function(serialData){
 
-            if(port.vendorId=="0x0403"){
+                process.emit('serial-data', parser.parseMessage(serialData.toString()));
 
-                var serialPort = new Serial(port.comName, {
-                    baudRate: 57600,
-                    parser: Serial.parsers.readline('\n')
-                });
+            });
 
-                serialPort.on('data', function(serialData){
+            serialPort.on('disconnect', function() {
 
-                    if (serialData.toString().search("/MODULE FEUX DE SIGNALISATION/g")) {
+                console.log("[SERIAL CONNECTION] La connexion série vient d'être déconnecté ! ".red);
+                process.exit(1);
 
-                        console.log(serialData);
+            });
 
-                        process.emit('serial-data', parser.parseMessage(serialData.toString()));
+        }
 
-                    }else{
-
-                        serialPort.close();
-
-                    }
-
-                });
-
-                serialPort.on('disconnect', function() {
-
-                    console.log("[SERIAL CONNECTION] La connexion série vient d'être déconnecté ! ".red);
-                    process.exit(1);
-
-                });
-
-            }
-
-        });
-
-    }
+    });
 
 });
