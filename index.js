@@ -8,7 +8,10 @@ var parser = require("./lib/parser");
 var windowsPort = "COM5";
 var linuxPort= "/dev/ttyUSB0";
 
-var serialPort = new Serial(windowsPort, {baudRate: 57600});
+var serialPort = new Serial(windowsPort, {
+    baudRate: 57600,
+    parser: Serial.parsers.readline('\n')
+});
 
 serialPort.on('open', function(){
 
