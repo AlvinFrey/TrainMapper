@@ -1,5 +1,5 @@
 {
-  "name": "tchoutchou",
+  "name": "TrainMapper",
   "version": "1.0.0",
   "description": "Telemetry sytem for modelism rail system",
   "main": "index.js",
