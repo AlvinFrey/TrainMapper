@@ -5,14 +5,14 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/EmuTeam/tchoutchou.git"
+    "url": "git+https://github.com/AlvinFrey/TrainMapper.git"
   },
   "license": "CC-BY-NC-SA-4.0",
   "scripts": {
-    "start": "node bin/core.js"
+    "start": "pm2 start index.js"
   },
   "bugs": {
-    "url": "https://gitlab.com/EmuTeam/tchoutchou/issues"
+    "url": "https://github.com/AlvinFrey/TrainMapper/issues"
   },
   "author": {
     "name": "FREY Alvin",
@@ -40,7 +40,7 @@
   "dependencies": {
     "colors": "^1.1.2",
     "express": "^4.14.0",
-    "health-check-library": "^2.0.1",
+    "pm2-check-express": "^0.1.0",
     "serialport": "^4.0.7",
     "socket.io": "^1.7.2"
   }
