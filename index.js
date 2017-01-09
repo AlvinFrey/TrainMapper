@@ -2,7 +2,6 @@
 var colors = require('colors');
 var Serial = require("serialport");
 var telemetry = require("./lib/telemetry");
-var healthCheck = require("./lib/health");
 var parser = require("./lib/parser");
 
 Serial.list(function (err, testingPorts) {
@@ -22,25 +21,27 @@ Serial.list(function (err, testingPorts) {
 
                     clearTimeout(verificationTimeout);
 
-                    console.log("[SERIAL CONNECTION] Nouvelle donnée reçue : ".green, serialData.toString().bold.green);
-
                     process.emit('serial-data', parser.parseMessage(serialData.toString()));
-
-                    serialPort.on('disconnect', function(){
-
-                        console.log("[SERIAL CONNECTION] La connexion série vient d'être déconnecté ! ".red);
-
-                    });
 
                 }else{
 
                     serialPort.close();
 
                 }
+
+            });
+
+            serialPort.on('disconnect', function(){
+
+                console.log("[SERIAL CONNECTION] La connexion série vient d'être déconnecté ! ".red);
+                process.exit(1);
+
             });
 
         }, 2500);
 
     });
+
+    console.log("[SERIAL CONNECTION] Impossible de trouver un port COM utilisable".red);
 
 });
