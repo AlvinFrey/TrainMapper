@@ -5,6 +5,14 @@ var telemetry = require("./lib/telemetry");
 var healthCheck = require("./lib/health");
 var parser = require("./lib/parser");
 
+Serial.list(function (err, ports) {
+  ports.forEach(function(port) {
+    console.log(port.comName);
+    console.log(port.pnpId);
+    console.log(port.manufacturer);
+  });
+});
+
 var serialPort = new Serial("/dev/ttyUSB0", {baudRate: 57600});
 
 serialPort.on('open', function(){
