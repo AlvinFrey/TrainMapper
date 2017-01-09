@@ -7,26 +7,45 @@ var parser = require("./lib/parser");
 
 Serial.list(function (err, testingPorts) {
 
+	console.log(testingPorts);
+
     testingPorts.forEach(function(port) {
 
+	console.log(port);
+	
         var serialPort = new Serial(port.comName, {
             baudRate: 57600,
             parser: Serial.parsers.readline('\n')
         });
+		
 
         serialPort.on('data', function(serialData){
 
+		console.log(serialData);
+		
             if (serialData.toString().search("/MODULE FEUX DE SIGNALISATION/g")) {
 
                 console.log("c'est lui");
-
-            }else{
-
-                serialPort.close();
+				
+				if(serialPort.isOpen()){
+					
+				serialPort.close();	
+				
+				
+					
+				}
+				
+				
 
             }
 
         });
+		
+		serialPort.on('close', function(){
+
+   console.log("[SERIAL CONNECTION] La connexion série vient d'être déconnecté ! ");
+
+});
 
     });
 
