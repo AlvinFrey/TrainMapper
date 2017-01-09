@@ -9,7 +9,10 @@ Serial.list(function (err, testingPorts) {
 
     testingPorts.forEach(function(port) {
 
-        var serialPort = new Serial(port.comName);
+        var serialPort = new Serial(port.comName, {
+            baudRate: 57600,
+            parser: Serial.parsers.readline('\n')
+        });
 
         serialPort.on('data', function(serialData){
 
