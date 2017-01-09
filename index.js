@@ -26,9 +26,9 @@ serialPort.on('data', function(serialData){
 
 serialPort.on('error', function(serialError){
 
-    if(serialError.toString() == "Error: Error: No such file or directory, cannot open /dev/ttyUSB0"){
+    if(serialError.toString().search("/Error: No such file or directory/g")){
 
-        console.log("[SERIAL CONNECTION] le port série n'a pas été trouvé ? Est-ce que vous l'avez branché ?".bold.red);
+        console.log("[SERIAL CONNECTION] Le port série n'a pas été trouvé ? Est-ce que vous l'avez branché ?".bold.red);
 
     }else{
 
