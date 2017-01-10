@@ -1,4 +1,10 @@
 
-var socket = io('http://localhost:1251');
+var socket = io('http://localhost:1250');
+
+socket.on("serial-data", function(data){
+
+   console.log(data);
+
+});
 
 
