@@ -6,7 +6,8 @@ var writer = require("./lib/writer");
 
 Serial.list(function (err, ports) {
     ports.forEach(function (port) {
-        if (port.vendorId == "0403") {
+    	console.log(port.comName + " : " + port.vendorId);
+        if (port.vendorId == "0403" || port.vendorId == 0x0403) {
             var serialPort = new Serial(port.comName, {
                 baudRate: 57600,
                 parser: Serial.parsers.readline('\n')
