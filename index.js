@@ -1,60 +1,68 @@
-var colors = require('colors');
-var Serial = require("serialport");
-var telemetry = require("./lib/telemetry");
-var parser = require("./lib/parser");
-var writer = require("./lib/writer");
+var logger = require("./lib/logger");
+logger.startLogger();
 
-Serial.list(function (err, ports) {
-    ports.forEach(function (port) {
-    	
-        if (port.vendorId == "0403" || port.vendorId == 0x0403) {
-            var serialPort = new Serial(port.comName, {
-                baudRate: 57600,
-                parser: Serial.parsers.readline('\n')
-            });
+setTimeout(function () {
 
+    var colors = require('colors');
+    var Serial = require("serialport");
+    var telemetry = require("./lib/telemetry");
+    var parser = require("./lib/parser");
+    var writer = require("./lib/writer");
 
-            serialPort.on('open', function () {
+    Serial.list(function (err, ports) {
+        ports.forEach(function (port) {
 
-                console.log("[SERIAL CONNECTION] La connexion série vient de s'ouvrir sur le port : ".green + port.comName.green);
-
-                setTimeout(function () {
+            if (port.vendorId == "0403" || port.vendorId == 0x0403) {
+                var serialPort = new Serial(port.comName, {
+                    baudRate: 57600,
+                    parser: Serial.parsers.readline('\n')
+                });
 
 
-                    serialPort.write(writer.createAction({
-                        feux: true,
-                        module1: true,
-                        module2: true,
-                        module3: true,
-                        module4: true,
-                        module5: true,
-                        module6: true,
-                        module7: true,
-                        module8: true,
-                        order1: 1,
-                        order2: 1,
-                        order3: 1,
-                        order4: 1
+                serialPort.on('open', function () {
+
+                    logger.log("La connexion série vient de s'ouvrir sur le port : " + port.comName);
+
+                    setTimeout(function () {
 
 
-                    }));
+                        serialPort.write(writer.createAction({
+                            feux: true,
+                            module1: true,
+                            module2: true,
+                            module3: true,
+                            module4: true,
+                            module5: true,
+                            module6: true,
+                            module7: true,
+                            module8: true,
+                            order1: 1,
+                            order2: 1,
+                            order3: 1,
+                            order4: 1
 
-                }, 3000);
-            });
 
-            serialPort.on('data', function (serialData) {
+                        }));
 
-                process.emit('serial-data', parser.parseMessage(serialData.toString()));
+                    }, 3000);
+                });
 
-            });
+                serialPort.on('data', function (serialData) {
 
-            serialPort.on('disconnect', function () {
+                    process.emit('serial-data', parser.parseMessage(serialData.toString()));
 
-                console.log("[SERIAL CONNECTION] La connexion série vient d'être déconnecté ! ".red);
-                process.exit(1);
+                });
 
-            });
-        }
+                serialPort.on('disconnect', function () {
 
+                    logger.log("La connexion série vient d'être déconnecté ! ");
+                    process.exit(1);
+
+                });
+            }
+
+        });
     });
-});
+
+
+}, 1000);
