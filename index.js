@@ -3,6 +3,7 @@ var colors = require('colors');
 var Serial = require("serialport");
 var telemetry = require("./lib/telemetry");
 var parser = require("./lib/parser");
+var writer = require("./lib/writer");
 
 Serial.list(function (err, testingPorts) {
 
@@ -16,6 +17,24 @@ Serial.list(function (err, testingPorts) {
             });
 
             serialPort.on('data', function(serialData){
+
+                port.write(writer.createAction(
+
+                    feux = true,
+                    module1 = true,
+                    module2 = true,
+                    module3 = true,
+                    module4 = true,
+                    module5 = true,
+                    module6 = true,
+                    module7 = true,
+                    module8 = true,
+                    order1 = 1,
+                    order2 = 1,
+                    order3 = 1,
+                    order4 = 1
+
+                ));
 
                 process.emit('serial-data', parser.parseMessage(serialData.toString()));
 
