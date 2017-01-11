@@ -1,4 +1,11 @@
 
+a{
+
+    color: #27ae60 !important;
+    text-decoration: none;
+
+}
+
 .layout-transparent {
 
     background-color: #3f3e3d;
@@ -9,7 +16,7 @@
 
     color: white;
 
-}back
+}
 
 .mdl-layout__title, .mdl-layout-title {
 
@@ -49,8 +56,15 @@
 
 }
 
+.mdl-navigation__link{
+
+    cursor: pointer;
+
+}
+
 #circuitSVG{
 
-    margin: 0 auto;
+    width: 100%;
+    height: 100%;
 
 }

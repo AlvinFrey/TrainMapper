@@ -1,5 +1,6 @@
 var colors = require('colors');
 var Serial = require("serialport");
+
 var telemetry = require("./lib/telemetry");
 var parser = require("./lib/parser");
 var writer = require("./lib/writer");
@@ -8,13 +9,12 @@ process.setMaxListeners(0);
 
 Serial.list(function (err, ports) {
     ports.forEach(function (port) {
-
         if (port.vendorId == "0403" || port.vendorId == 0x0403) {
+
             var serialPort = new Serial(port.comName, {
                 baudRate: 57600,
                 parser: Serial.parsers.readline('\n')
             });
-
 
             serialPort.on('open', function () {
 
@@ -28,7 +28,6 @@ Serial.list(function (err, ports) {
 
                 process.on("light-switch", function (lightData){
 
-
                     serialPort.write(new Buffer(writer.createEasyAction("feu", lightData.id.charAt(0) + "." + lightData.id.charAt(1), lightData.state) + "\n"));
 
                 });
@@ -41,8 +40,8 @@ Serial.list(function (err, ports) {
                 process.exit(1);
 
             });
-        }
 
+        }
     });
 });
 

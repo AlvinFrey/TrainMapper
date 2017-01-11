@@ -9,7 +9,7 @@
   },
   "license": "CC-BY-NC-SA-4.0",
   "scripts": {
-    "start": "pm2 start index.js"
+    "start": "node index.js"
   },
   "bugs": {
     "url": "https://github.com/AlvinFrey/TrainMapper/issues"

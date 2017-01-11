@@ -128,4 +128,115 @@ document.getElementById("circuitSVG").addEventListener("load", function() {
         });
     }
 
+    var lightsActive = 0;
+
+    document.getElementById("lights").addEventListener("click", function() {
+
+        if(lightsActive==0){
+
+            feux.forEach(function(id) {
+                svgDoc.getElementById(id).style.setProperty("display", "none");
+            });
+
+            lightsActive = 1;
+
+        }else if(lightsActive==1){
+
+            feux.forEach(function(id) {
+                svgDoc.getElementById(id).style.setProperty("display", "block");
+            });
+
+            lightsActive = 0;
+
+        }
+
+    });
+
+    var switchingActive = 0;
+
+    document.getElementById("switching").addEventListener("click", function() {
+
+        var switching = [
+            "11a",
+            "12a",
+            "13a",
+            "21a",
+            "22a",
+            "23a",
+            "32a",
+            "34a",
+            "43a",
+            "44a",
+            "hautdouble",
+            "basdouble",
+            "g4567"
+        ];
+
+        if(switchingActive==0){
+
+            switching.forEach(function(id) {
+                console.log(id);
+                svgDoc.getElementById(id).style.setProperty("display", "none");
+            });
+
+            switchingActive = 1;
+
+        }else if(switchingActive==1){
+
+            switching.forEach(function(id) {
+                svgDoc.getElementById(id).style.setProperty("display", "block");
+            });
+
+            switchingActive = 0;
+
+        }
+
+    });
+
+    var placesActive = 0;
+
+    document.getElementById("places").addEventListener("click", function() {
+
+        var places = [
+            "11",
+            "12",
+            "13",
+            "14",
+            "21",
+            "22",
+            "23",
+            "24",
+            "31",
+            "32",
+            "33",
+            "34",
+            "41",
+            "43",
+            "44",
+            "51",
+            "52",
+            "53",
+            "54"
+        ];
+
+        if(placesActive==0){
+
+            places.forEach(function(id) {
+                svgDoc.getElementById(id).style.setProperty("display", "none");
+            });
+
+            placesActive = 1;
+
+        }else if(placesActive==1){
+
+            places.forEach(function(id) {
+                svgDoc.getElementById(id).style.setProperty("display", "block");
+            });
+
+            placesActive = 0;
+
+        }
+
+    });
+
 });

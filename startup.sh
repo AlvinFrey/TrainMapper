@@ -1,6 +1,12 @@
 #!/usr/bin/bash
 
-apt-get install -y nodejs-legacy nodejs npm git
-git clone "https://github.com/AlvinFrey/TrainMapper.git"
+SUDO=''
+if (( $EUID != 0 )); then
+    SUDO='sudo'
+fi
+$SUDO curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+$SUDO apt-get install -y nodejs
+$SUDO apt-get install -y nodejs-legacy npm git
+$SUDO git clone "https://github.com/AlvinFrey/TrainMapper.git"
 cd TrainMapper
-npm install pm2@latest -g && npm install && pm2 startup
+$SUDO npm install pm2@latest -g && npm install && pm2 startup
