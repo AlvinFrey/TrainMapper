@@ -293,7 +293,7 @@
          x="1204.6038"
          height="80.577522"
          width="213.05815"
-         id="rect3417"
+         id="23"
          style="fill:#333333;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.80343109px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <rect
          transform="matrix(0.73690632,-0.67599488,0.70012866,0.71401671,0,0)"
@@ -1179,7 +1179,7 @@
          transform="matrix(0.99979893,0.02005239,-0.02030316,0.99979387,0,0)" />
       <ellipse
          style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:4.99178743;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="ellipse4490"
+         id="54l"
          cx="846.05493"
          cy="1010.1165"
          rx="26.485973"
@@ -1187,7 +1187,7 @@
          transform="matrix(0.99979893,0.02005239,-0.02030316,0.99979387,0,0)" />
       <ellipse
          style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:5.54200792;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="54l"
+         id="44l"
          cx="3.8790305"
          cy="-412.59811"
          rx="29.405394"
