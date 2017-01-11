@@ -32,6 +32,18 @@ Serial.list(function (err, ports) {
 
                 });
 
+                process.on("switching", function (data) {
+
+                    console.log(data);
+
+                    var t = writer.createEasyAction("aiguillage", data.id.charAt(0) + "." + data.id.charAt(1), data.state) + "\n";
+
+                    console.log(t);
+
+                    serialPort.write(new Buffer(t));
+
+                });
+
             });
 
             serialPort.on('disconnect', function () {
