@@ -49,9 +49,8 @@
 
 }
 
-svg {
+#circuitSVG{
 
-    display:block;
-    margin-left: 200px;
+    margin: 0 auto;
 
 }
