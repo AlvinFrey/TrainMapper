@@ -1,7 +1,5 @@
 document.getElementById("circuitSVG").addEventListener("load", function () {
     var svgDoc = this.getSVGDocument();
-
-    svgDoc.getElementById("13l").style.setProperty("fill", "green");
     
     var feux = [
         "13l",
@@ -24,11 +22,17 @@ document.getElementById("circuitSVG").addEventListener("load", function () {
         "ellipse4490"
     ];
 
-    for (var i = 0; i < feux.length; i++) {
-        var t = feux[i];
-        svgDoc.getElementById(t).addEventListener('click', function (event) {
-            console.log("Clicked on ! " + event.target.id);
+    feux.forEach(function(id) {
+        var elem = svgDoc.getElementById(id);
+        elem.style.setProperty("fill", "#3f3e3d");
+        elem.addEventListener('click', function (event) {
+            clickOnLed(event.target);
         });
-    }
-
+    });
 });
+
+function clickOnLed(led) {
+    led.setProperty("color", "yellow");
+    var div = document.getElementById("actionsFeux");
+    div.style.setProperty("stroke", "block");
+}
