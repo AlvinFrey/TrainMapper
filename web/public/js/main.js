@@ -152,18 +152,21 @@ document.getElementById("circuitSVG").addEventListener("load", function() {
 
     function setAigState(aig, state){
 
-        socket.emit("switching", {id: aig.id, state: state});
+        socket.emit("switching", {id: aig, state: state});
 
         if (state.includes("bifurcation")) {
 
+            aig.parentElement.style.setProperty("fill", "#27ae60");
             aig.style.setProperty("fill", "#27ae60");
 
         } else if (state.includes("tout droit")) {
 
+            aig.parentElement.style.setProperty("fill", "#e74c3c");
             aig.style.setProperty("fill", "#e74c3c");
 
         } else if (state.includes("degrippage")) {
 
+            aig.parentElement.style.setProperty("fill", "#e67e22");
             aig.style.setProperty("fill", "#e67e22");
 
         }
@@ -255,8 +258,7 @@ document.getElementById("circuitSVG").addEventListener("load", function() {
             "43a",
             "44a",
             "hautdouble",
-            "basdouble",
-            "g4567"
+            "basdouble"
         ];
 
         if(switchingActive==0){
