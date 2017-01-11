@@ -18,33 +18,19 @@ Serial.list(function (err, ports) {
 
                 console.log("La connexion série vient de s'ouvrir sur le port : " + port.comName);
 
-                setTimeout(function () {
-
-
-                    serialPort.write(writer.createAction({
-                        feux: true,
-                        module1: true,
-                        module2: true,
-                        module3: true,
-                        module4: true,
-                        module5: true,
-                        module6: true,
-                        module7: true,
-                        module8: true,
-                        order1: 1,
-                        order2: 1,
-                        order3: 1,
-                        order4: 1
-
-
-                    }));
-
-                }, 3000);
             });
 
             serialPort.on('data', function (serialData) {
 
                 process.emit('serial-data', parser.parseMessage(serialData.toString()));
+
+                process.on("light-switch", function (lightData){
+
+                    console.log(lightData);
+
+                    writer.createEasyAction("feu", lightData.id.charAt(0) + "." + lightData.id.charAt(1), lightData.state);
+
+                });
 
             });
 
