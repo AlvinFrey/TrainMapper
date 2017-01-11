@@ -4,6 +4,8 @@ var telemetry = require("./lib/telemetry");
 var parser = require("./lib/parser");
 var writer = require("./lib/writer");
 
+process.setMaxListeners(0);
+
 Serial.list(function (err, ports) {
     ports.forEach(function (port) {
 
@@ -26,9 +28,8 @@ Serial.list(function (err, ports) {
 
                 process.on("light-switch", function (lightData){
 
-                    console.log(lightData);
 
-                    writer.createEasyAction("feu", lightData.id.charAt(0) + "." + lightData.id.charAt(1), lightData.state);
+                    serialPort.write(new Buffer(writer.createEasyAction("feu", lightData.id.charAt(0) + "." + lightData.id.charAt(1), lightData.state) + "\n"));
 
                 });
 
