@@ -45,9 +45,11 @@ document.getElementById("circuitSVG").addEventListener("load", function () {
     });
 
     document.getElementById("ledEteindreLeds").addEventListener("click", function() {
-        /*feux.forEach(function(id) {
+        if (selectedLed != null)
+            clickOnLed(selectedLed, svgDoc);
+        feux.forEach(function(id) {
             setLedState(svgDoc.getElementById(id), "off");
-        });*/
+        });
     });
 });
 
@@ -61,10 +63,13 @@ function clickLedButton(state, svgDoc) {
 function setLedState(led, state) {
     if (state.includes("green")) {
         led.style.setProperty("fill", "#27ae60");
+        //Envoyer ordre sur serial ici
     } else if (state.includes("red")) {
         led.style.setProperty("fill", "#e74c3c");
+        //Envoyer ordre sur serial ici
     } else if (state.includes("off")) {
         led.style.setProperty("fill", "#3f3e3d");
+        //Envoyer ordre sur serial ici
     }
 }
 
@@ -83,6 +88,8 @@ function clickOnLed(led, svgDoc) {
 }
 
 function resetLedsStrokeColor(svgDoc) {
+    if (selectedLed != null)
+        selectedLed.style.setProperty("stroke", "white");
     feux.forEach(function(id) {
         svgDoc.getElementById(id).style.setProperty("stroke", "white");
     });
