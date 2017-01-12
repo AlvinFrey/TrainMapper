@@ -18,7 +18,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="public/icons/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="public/icons/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="public/icons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="public/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="public/icons/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="public/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="public/icons/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="public/icons/favicon-16x16.png">
@@ -32,71 +32,88 @@
         <div class="mdl-layout__header-row">
             <span class="mdl-layout-title center-items">TrainMapper</span>
         </div>
-        <div class="mdl-layout__header-row center-items">
-            <div class="mdl-layout-spacer"></div>
-            <!-- Navigation -->
-            <nav class="mdl-navigation center-items">
-                <a class="mdl-navigation__link" id="lights">Feux Bicolores</a>
-                <a class="mdl-navigation__link" id="switching">Aiguillages</a>
-                <a class="mdl-navigation__link" id="places">Position</a>
-            </nav>
-        </div>
-    </header>
+        <!-- Navigation -->
+        <nav class="mdl-navigation center-items">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="lights">
+                <input type="checkbox" id="lights" class="mdl-switch__input" checked>
+                <span class="mdl-switch__label">Feux&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+            </label>
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switching">
+                <input type="checkbox" id="switching" class="mdl-switch__input" checked>
+                <span class="mdl-switch__label">Aiguillages&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+            </label>
 
-        <object type="image/svg+xml" data="public/img/circuit.svg" id="circuitSVG" class="center-items">
-            Votre navigateur n'arrive pas à charger l'image. Essayez avec une version plus récente de Firefox ou Chrome.
-        </object>
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="places">
+                <input type="checkbox" id="places" class="mdl-switch__input" checked>
+                <span class="mdl-switch__label">Position&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+            </label>
+        </nav>
+</header>
 
-        <div id="actions">
-            <div id="actionsFeux">
-                <button id="ledVertButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="margin-right: 10px; background-color: #27ae60">
-                    Vert
-                </button>
-                <button id="ledRougeButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="margin-right: 10px; margin-left: 10px; background-color: #e74c3c">
-                    Rouge
-                </button>
-                <button id="ledEteindreButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="margin-left: 10px; background-color: #7f8c8d">
-                    Eteindre
-                </button>
-            </div>
-            <div id="actionsAiguillages">
-                <button id="aiguillageBifurcationButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="margin-right: 10px; background-color: #27ae60">
-                    Bifurcation
-                </button>
-                <button id="aiguillageToutDroitButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="margin-right: 10px; margin-left: 10px; background-color: #e74c3c">
-                    Tout droit
-                </button>
-                <button id="aiguillageDegrippageButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="margin-left: 10px; background-color: #e67e22">
-                    Degrippage
-                </button>
-            </div>
+<object type="image/svg+xml" data="public/img/circuit.svg" id="circuitSVG" class="center-items">
+    Votre navigateur n'arrive pas à charger l'image. Essayez avec une version plus récente de Firefox ou Chrome.
+</object>
 
-            <br/>
-            <br/>
+<div id="actions">
+    <div id="actionsFeux">
+        <button id="ledVertButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                style="margin-right: 10px; background-color: #27ae60">
+            Vert
+        </button>
+        <button id="ledRougeButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                style="margin-right: 10px; margin-left: 10px; background-color: #e74c3c">
+            Rouge
+        </button>
+        <button id="ledEteindreButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                style="margin-left: 10px; background-color: #7f8c8d">
+            Eteindre
+        </button>
+    </div>
+    <div id="actionsAiguillages">
+        <button id="aiguillageBifurcationButton"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                style="margin-right: 10px; background-color: #27ae60">
+            Bifurcation
+        </button>
+        <button id="aiguillageToutDroitButton"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                style="margin-right: 10px; margin-left: 10px; background-color: #e74c3c">
+            Tout droit
+        </button>
+        <button id="aiguillageDegrippageButton"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                style="margin-left: 10px; background-color: #e67e22">
+            Degrippage
+        </button>
+    </div>
 
-        </div>
+    <br/>
+    <br/>
 
-        <footer class="mdl-mini-footer">
-            <div class="mdl-mini-footer__left-section">
-                <div class="mdl-logo"><a href="http://www.0.4.uha.fr/" target="_blank">© UHA 4.0</a></div>
-            </div>
+</div>
 
-            <div class="mdl-mini-footer__right-section">
+<footer class="mdl-mini-footer">
+    <div class="mdl-mini-footer__left-section">
+        <div class="mdl-logo"><a href="http://www.0.4.uha.fr/" target="_blank">© UHA 4.0</a></div>
+    </div>
 
-                <button id="ledEteindreLeds" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="margin-left: 10px; background-color: #7f8c8d">
-                    Eteindre toutes les leds
-                </button>
+    <div class="mdl-mini-footer__right-section">
 
-            </div>
-
-        </footer>
+        <button id="ledEteindreLeds" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                style="margin-left: 10px; background-color: #7f8c8d">
+            Eteindre toutes les leds
+        </button>
 
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="public/js/material.min.js"></script>
-    <script src="public/js/jquery-3.1.1.js"></script>
-    <script src="public/js/main.js"></script>
+</footer>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="public/js/material.min.js"></script>
+<script src="public/js/jquery-3.1.1.js"></script>
+<script src="public/js/main.js"></script>
 
 </body>
 </html>
