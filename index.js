@@ -26,23 +26,19 @@ Serial.list(function (err, ports) {
 
                 process.emit('serial-data', parser.parseMessage(serialData.toString()));
 
-                process.on("light-switch", function (lightData){
+            });
 
-                    serialPort.write(new Buffer(writer.createEasyAction("feu", lightData.id.charAt(0) + "." + lightData.id.charAt(1), lightData.state) + "\n"));
+            process.on("light-switch", function (lightData){
+                
+                serialPort.write(new Buffer(writer.createEasyAction("feu", lightData.id.charAt(0) + "." + lightData.id.charAt(1), lightData.state) + "\n"));
 
-                });
+            });
 
-                process.on("switching", function (data) {
+            process.on("switching", function (data) {
 
-                    console.log(data);
+                var t = writer.createEasyAction("aiguillage", data.id.charAt(0) + "." + data.id.charAt(1), data.state) + "\n";
 
-                    var t = writer.createEasyAction("aiguillage", data.id.charAt(0) + "." + data.id.charAt(1), data.state) + "\n";
-
-                    console.log(t);
-
-                    serialPort.write(new Buffer(t));
-
-                });
+                serialPort.write(new Buffer(t));
 
             });
 
