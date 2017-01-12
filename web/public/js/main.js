@@ -52,13 +52,36 @@ document.getElementById("circuitSVG").addEventListener("load", function() {
         "54l"
     ];
 
+    var aiguillages = [
+        "11a",
+        "12a",
+        "13a",
+        "21a",
+        "22a",
+        "23a",
+        "31a",
+        "32a",
+        "34a",
+        "43a",
+        "44a"
+    ];
+
     var selectedLed = null;
+    var selectedAig = null;
 
     feux.forEach(function(id) {
         var elem = svgDoc.getElementById(id);
         elem.style.setProperty("fill", "#3f3e3d");
         elem.addEventListener('click', function (event) {
             clickOnLed(event.target, svgDoc);
+        });
+    });
+
+    aiguillages.forEach(function(id) {
+        var elem = svgDoc.getElementById(id);
+        elem.style.setProperty("fill", "#3f3e3d");
+        elem.addEventListener('click', function (event) {
+            clickOnAiguillage(event.target, svgDoc);
         });
     });
 
@@ -74,6 +97,18 @@ document.getElementById("circuitSVG").addEventListener("load", function() {
         clickLedButton("off", svgDoc);
     });
 
+    document.getElementById("aiguillageBifurcationButton").addEventListener("click", function() {
+        clickAigButton("bifurcation", svgDoc);
+    });
+
+    document.getElementById("aiguillageToutDroitButton").addEventListener("click", function() {
+        clickAigButton("tout droit", svgDoc);
+    });
+
+    document.getElementById("aiguillageDegrippageButton").addEventListener("click", function() {
+        clickAigButton("degrippage", svgDoc);
+    });
+
     document.getElementById("ledEteindreLeds").addEventListener("click", function() {
         if (selectedLed != null)
             clickOnLed(selectedLed, svgDoc);
@@ -86,6 +121,13 @@ document.getElementById("circuitSVG").addEventListener("load", function() {
         if (selectedLed != null) {
             setLedState(selectedLed, state.toLowerCase());
             clickOnLed(selectedLed, svgDoc);
+        }
+    }
+
+    function clickAigButton(state, svgDoc) {
+        if (selectedAig != null) {
+            setAigState(selectedAig, state.toLowerCase());
+            clickOnAiguillage(selectedAig, svgDoc);
         }
     }
 
@@ -108,8 +150,35 @@ document.getElementById("circuitSVG").addEventListener("load", function() {
         }
     }
 
+    function setAigState(aig, state){
+
+        socket.emit("switching", {id: aig, state: state});
+
+        if (state.includes("bifurcation")) {
+
+            aig.parentElement.style.setProperty("fill", "#27ae60");
+            aig.style.setProperty("fill", "#27ae60");
+
+        } else if (state.includes("tout droit")) {
+
+            aig.parentElement.style.setProperty("fill", "#e74c3c");
+            aig.style.setProperty("fill", "#e74c3c");
+
+        } else if (state.includes("degrippage")) {
+
+            aig.parentElement.style.setProperty("fill", "#e67e22");
+            aig.style.setProperty("fill", "#e67e22");
+
+        }
+
+    }
+
     function clickOnLed(led, svgDoc) {
-        resetLedsStrokeColor(svgDoc);
+        resetStrokeColor(svgDoc);
+        if (selectedAig != null) {
+            selectedAig = null;
+            document.getElementById("actionsAiguillages").style.setProperty("display", "none");
+        }
         if (selectedLed == led) {
             selectedLed = null;
             document.getElementById("actionsFeux").style.setProperty("display", "none");
@@ -120,10 +189,31 @@ document.getElementById("circuitSVG").addEventListener("load", function() {
         }
     }
 
-    function resetLedsStrokeColor(svgDoc) {
+    function clickOnAiguillage(aig, svgDoc) {
+        resetStrokeColor(svgDoc);
+        if (selectedLed != null) {
+            selectedLed = null;
+            document.getElementById("actionsFeux").style.setProperty("display", "none");
+        }
+        if (selectedAig == aig) {
+            selectedAig = null;
+            document.getElementById("actionsAiguillages").style.setProperty("display", "none");
+        } else {
+            selectedAig = aig;
+            aig.style.setProperty("stroke", "yellow");
+            document.getElementById("actionsAiguillages").style.setProperty("display", "block");
+        }
+    }
+
+    function resetStrokeColor(svgDoc) {
         if (selectedLed != null)
             selectedLed.style.setProperty("stroke", "white");
+        if (selectedAig != null)
+            selectedAig.style.setProperty("stroke", "white");
         feux.forEach(function(id) {
+            svgDoc.getElementById(id).style.setProperty("stroke", "white");
+        });
+        aiguillages.forEach(function(id) {
             svgDoc.getElementById(id).style.setProperty("stroke", "white");
         });
     }
@@ -168,8 +258,7 @@ document.getElementById("circuitSVG").addEventListener("load", function() {
             "43a",
             "44a",
             "hautdouble",
-            "basdouble",
-            "g4567"
+            "basdouble"
         ];
 
         if(switchingActive==0){
