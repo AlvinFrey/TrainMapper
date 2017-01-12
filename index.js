@@ -29,7 +29,7 @@ Serial.list(function (err, ports) {
             });
 
             process.on("light-switch", function (lightData){
-                
+
                 serialPort.write(new Buffer(writer.createEasyAction("feu", lightData.id.charAt(0) + "." + lightData.id.charAt(1), lightData.state) + "\n"));
 
             });
