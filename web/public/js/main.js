@@ -264,7 +264,6 @@ document.getElementById("circuitSVG").addEventListener("load", function() {
         if(switchingActive==0){
 
             switching.forEach(function(id) {
-                console.log(id);
                 svgDoc.getElementById(id).style.setProperty("display", "none");
             });
 

@@ -62,6 +62,30 @@ a{
 
 }
 
+.mdl-switch__thumb{
+
+    background: #27ae60 !important;
+
+}
+
+.mdl-switch__ripple-container .mdl-ripple {
+
+    background: #27ae60 !important;
+
+}
+
+.mdl-switch.is-checked .mdl-switch__thumb {
+
+    background: #27ae60 !important;
+
+}
+
+.mdl-switch.is-checked .mdl-switch__track {
+
+    background: rgba(39, 174, 96, 0.28) !important;
+
+}
+
 #circuitSVG{
 
     width: 100%;
