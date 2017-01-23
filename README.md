@@ -7,7 +7,7 @@
 Sur Linux, nous avons mis en place un script (startup.sh) qui permet d'installer automatiquement les logiciels et récupérer automatiquement le projet, pour le lancer il faut faire cette commande : 
 
 ``` 
-$ sh startup.sh
+$ sh scripts/startup.sh
 ```
 
 Sur Windows il vous suffit de télécharger les logiciels [NodeJS] et [Git] et cloner le projet venant de Github, ensuite il faut vous rendre dans le dossier du projet via un terminal et taper la commande :
